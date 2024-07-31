@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build_php:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build PHP 8.3 Docker Image
+      run: |
+        cd php
+        docker build . --file Dockerfile --tag ultimatesmoker/php8.3-laravel:dev
+        docker push ultimatesmoker/php8.3-laravel:dev
+
