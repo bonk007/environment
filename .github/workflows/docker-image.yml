@@ -16,13 +16,10 @@ jobs:
         cd php
         docker build . --file Dockerfile --tag ultimatesmoker/php8.3-laravel:dev
 
-  push_php:
-    runs-on: ubuntu-latest
-    needs: build_php
-    steps:
     - name: Push PHP 8.3 Docker Image
       env:
         DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
       run: |
         docker login -u ultimatesmoker --password "$DOCKER_HUB_TOKEN"
         docker push ultimatesmoker/php8.3-laravel:dev
+    
